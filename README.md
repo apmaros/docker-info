@@ -1,6 +1,9 @@
 # Docker tutorial
 This tutorial walks the reader trough and explains the main concepts of the docker.
 
+**WORK IN PROGRESS**
+This project is in early stage and is incomplete.
+
 ## Docker Architecture
 
 ### Docker images
