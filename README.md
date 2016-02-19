@@ -1,7 +1,7 @@
 # Docker tutorial
 This tutorial can be considered as notes taken from Docker documentation and other learning using docker. It walks the reader trough and explains the main concepts of the docker.
 
-**WORK IN PROGRESS** - This project is in early stage and is incomplete.
+**WORK IN PROGRESS** - This project is in early stage and is incomplete. Do not rely...
 
 ## Docker Architecture
 
@@ -27,14 +27,20 @@ As was describe above, docker image is immutable template used for launching doc
 **Dockerfile** stores above instructions and docker produces a docker image by executing them.
 
 ### Running docker container
+Run container means execute a command within the container. The simplest example is running `bash` within ubuntu.
 
-`$ docker run -i -t ubuntu /bin/bash`
+`docker -it ubunt /bin/bash` - runs the `bash`, interactive shell in the ubuntu image.
+  - `-i` - starts an interactive container.
+  - `-t` - creates a pseudo-TTY that attaches `STDIN`, `STDOUT` and `STDERR`.
 
-Runs `ubuntu` image with command `/bin/bash`
+Other useful commands are:
+- `docker info` - list docker configuration. Version, its home directory, memory, cpus and others.
+- `docker pull ubuntu` - find and downloads it to the docker cache. This step is redundant, because if the container will be pulled from the [docker hub](https://hub.docker.com/) with tag latest.
+- `docker --rm [other commands]` - **investigate docker --rm** - does it remove the whole image, or only its volumes? (https://docs.docker.com/engine/reference/run/#clean-up-rm)
 
 Under the hood docker:
 
-- Pulls the `ubunt` image if it does not exists locally. By default, it tries to pull the image from [Docker Hub](https://hub.docker.com/).
+- Pulls the `ubuntu` image if it does not exists locally. By default, it tries to pull the image from [Docker Hub](https://hub.docker.com/).
 - Creates a container
 - Allocates a filesystem and mounts a read-write layer
 - Allocates a network / bridge interface - to communicate with localhost
@@ -51,22 +57,5 @@ Other technologies used are for:
 - unifying layers to a single file system - `UnionFC`
 - wrapping all components into container format - `libcontainer` (it allows container to manage its lifecycle)
 
--------------------------------------------------------------------------------
-## NOTES
-### Docker engine
-
-~ add docker - docker-machine description, comparism to vm, ...
-
-`docker info` - list docker configuration. Version, its home directory, memory, cpus and others.
-
-`docker pull ubuntu` - find and downloads it to the docker cache. This step is redundant, because if the container will be pulled from the [docker hub](https://hub.docker.com/) with tag latest.
-
-`docker -it ubunt /bin/bash` - runs the `bash`, interactive shell in the ubuntu image.
-  - `-i` - starts an interactive container.
-  - `-t` - creates a pseudo-TTY that attaches `STDIN`, `STDOUT` and `STDERR`.
-
-`docker --rm ....` - **investigate docker --rm** - does it remove the whole image, or only its volumes? (https://docs.docker.com/engine/reference/run/#clean-up-rm)
-
-Resources:
-
-1. [Understanding docker](https://docs.docker.com/engine/understanding-docker/) 
+## Resources
+1. [Understanding docker](https://docs.docker.com/engine/understanding-docker)
