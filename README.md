@@ -43,11 +43,13 @@ Under the hood docker:
 - Captures STDOUT / STDERR
 
 ### Underlying technology
-Using technology [namespaces](http://man7.org/linux/man-pages/man7/namespaces.7.html) docker provides isolated workspace we call container. Running Docker container creates set of namespaces for that container.
+Unix [namespaces](http://man7.org/linux/man-pages/man7/namespaces.7.html) are used for creating isolated workspace we call container. There is a single namespace for each container.
+Some namespaces Docker uses are for process isolation (`pid`), networking (`net`), inter process communication (`ipc`), managing mount points (`mnt`) and isolating kernel (`uts`).
 
-There are other technologies used for:
+Other technologies used are for:
 - controlling hardware resource - `cgroups`, 
 - unifying layers to a single file system - `UnionFC`
+- wrapping all components into container format - `libcontainer` (it allows container to manage its lifecycle)
 
 -------------------------------------------------------------------------------
 ## NOTES
@@ -66,4 +68,5 @@ There are other technologies used for:
 `docker --rm ....` - **investigate docker --rm** - does it remove the whole image, or only its volumes? (https://docs.docker.com/engine/reference/run/#clean-up-rm)
 
 Resources:
+
 1. [Understanding docker](https://docs.docker.com/engine/understanding-docker/) 
